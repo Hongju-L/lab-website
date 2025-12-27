@@ -453,6 +453,11 @@ li {
     align-items: flex-start;
   }
 
+  .hero h1 {
+    line-height: calc(var(--baseline) * 2);
+  }
+
+
   .hero-extra {
     width: 100%;
     /* min-height: clamp(200px, 60vw, 320px); */
