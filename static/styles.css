@@ -8,11 +8,13 @@
   --baseline: 1.5rem;
   --baseline-half: calc(var(--baseline) / 2);
   --body-font: "Gothic A1", "Helvetica Neue", Arial, sans-serif;
+  --body-font-size: 17px;
   --heading-font: "Diphylleia", Georgia, "Times New Roman", serif;
 }
 
 body {
   font-family: var(--body-font);
+  font-size: var(--body-font-size);
   color: #e2e8f0;
   background-color: #030617;
   line-height: var(--baseline);
@@ -510,8 +512,8 @@ li {
 }
 
 .pi-avatar {
-  width: calc(var(--baseline) * 6);
-  height: calc(var(--baseline) * 6);
+  width: calc(var(--baseline) * 10);
+  height: calc(var(--baseline) * 10);
   border-radius: 999px;
   border: 1px solid rgba(148, 163, 184, 0.35);
   overflow: hidden;
@@ -763,7 +765,8 @@ li {
 }
 
 .pub-list li {
-  padding-bottom: var(--baseline-half);
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 
 .pub-title {

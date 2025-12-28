@@ -28,7 +28,7 @@
     <header class="site-header">
       <div class="container">
         <div class="brand">
-          <span class="lab-name"><a href="https://mirdita.org">Mirdita Lab</a></span>
+          <span class="lab-name"><a href="https://mirdita.org">Mirdita Lab @ SKKU</a></span>
           <span class="tagline">Laboratory of Bioinformatics <span class="fancy-amp">&amp;</span> Machine Learning</span>
         </div>
         <nav>
@@ -208,7 +208,13 @@
           <p>
             Full list available on <a href="https://orcid.org/0000-0001-8637-6719">ORCID</a> or <a href="https://scholar.google.com/citations?user=jaTEO_QAAAAJ">Google Scholar</a>.
           </p>
-          <ul id="publication-list" class="pub-list" aria-live="polite"></ul>
+          <ul id="publication-list" class="pub-list" aria-live="polite">
+            <!-- pubs:list:start -->
+            <!-- pubs:list:end -->
+          </ul>
+          <!-- pubs:data:start -->
+          <script type="application/json" id="publication-data"></script>
+          <!-- pubs:data:end -->
           <button type="button" id="show-more-pubs" class="show-more-pubs">Show more</button>
         </div>
       </section>
