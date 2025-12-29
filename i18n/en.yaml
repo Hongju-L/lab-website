@@ -1,0 +1,78 @@
+lang: en
+site.name: Mirdita Lab
+site.title: Mirdita Lab - Laboratory for Computational Biology &amp; Molecular Machine Learning
+site.description: Mirdita Lab builds scalable bioinformatics methods.
+brand.name: Mirdita Lab @ SKKU
+brand.tagline: |-
+  Laboratory for Computational Biology <span class="fancy-amp">&amp;</span> Molecular Machine Learning
+nav.team: Team
+nav.software: Software
+nav.publications: Publications
+nav.contact: Contact
+nav.language: Language
+hero.title: |-
+  Laboratory for Computational Biology&nbsp;<span class="fancy-amp">&amp;</span> Molecular Machine&nbsp;Learning
+hero.subtitle: |-
+  We bridge algorithms and usable software to map evolution, decode protein function, and annotate the unknown at scale.
+hero.cta.software: Explore software
+hero.cta.publications: Read papers
+hero.cta.team: Join the team
+structure.aria: View AlphaFold entry Q8W3K0
+pi.name: Milot Mirdita
+pi.role: Assistant Professor at SKKU
+pi.link.email: Email
+pi.link.bluesky: Follow on Bluesky
+pi.link.scholar: Google Scholar profile
+pi.link.github: GitHub
+pi.link.orcid: ORCID
+pi.link.cv: Curriculum Vitae
+pi.bio1: |-
+  Milot Mirdita is an Assistant Professor at the Department of Precision Medicine <a href="https://www.skkumed.ac.kr">SKKU School of Medicine</a>. His research focuses on scalable,
+  open bioinformatics infrastructure for metagenomic analysis, high-throughput homology search,
+  clustering, taxonomy, and structure prediction.
+pi.bio2: |-
+  He previously worked with <a href="https://steineggerlab.com">Prof. Dr. Martin Steinegger</a> and <a href="https://www.mpinat.mpg.de/soeding">Dr. Johannes Söding</a> to create widely
+  used methods for sequence alignment and annotation. Milot trained at the Max-Planck Institute
+  for Multidisciplinary Sciences (Dr. rer. nat.), LMU Munich (M.Sc. Computer Science), and LMU/TUM
+  (B.Sc. Bioinformatics).
+team.heading: Team
+team.copy: |-
+  We are hiring at all levels (lab manager, interns, graduate students, postdocs, and research software engineers) excited for
+  large-scale data processing, HPC/GPU programming, machine learning or open-source scientific software. Send a short
+  introduction and CV to <a href="mailto:milot@mirdita.org" target="_blank">milot@mirdita.org</a>.
+team.placeholder.name: You?
+team.placeholder.role: Join us
+team.placeholder.aria: Join the team
+alumni.heading: Alumni
+education.heading: Education
+software.heading: Software
+software.colabfold.alt: ColabFold logo
+software.colabfold.title: ColabFold
+software.colabfold.description: |-
+  Easy and accurate AlphaFold2 inference in the browser, maintained together with the <a href="https://steineggerlab.com">Steinegger Lab (SNU)</a>, <a href="https://solab.org">Solab (MIT)</a>
+  and open-source contributors.
+software.colabfold.link.main: Open ColabFold
+software.colabfold.link.protocol: Protocol
+software.colabfold.link.github: GitHub
+software.foldseek.alt: Foldseek logo
+software.foldseek.title: Foldseek Server
+software.foldseek.description: |-
+  Structure search that lets researchers query massive protein databases for homologous folds in seconds.
+software.foldseek.link.main: Visit Foldseek Server
+software.foldseek.link.paper: Paper
+software.foldseek.link.github: GitHub
+software.mmseqs.alt: MMseqs2-GPU logo
+software.mmseqs.title: MMseqs2-GPU
+software.mmseqs.description: |-
+  GPU-accelerated sequence search for high throughput and low latency.
+software.mmseqs.link.paper: MMseqs2-GPU Paper
+publications.heading: Publications
+publications.copy: |-
+  Full list available on <a href="https://orcid.org/0000-0001-8637-6719">ORCID</a> or <a href="https://scholar.google.com/citations?user=jaTEO_QAAAAJ">Google Scholar</a>.
+publications.show_more: Show more
+publications.empty: No publications found.
+contact.heading: Contact
+contact.copy: |-
+  Email: <a href="mailto:milot@mirdita.org">milot@mirdita.org</a><br>
+  SKKU, Suwon, Korea
+contact.map_label: Sungkyunkwan University, Suwon

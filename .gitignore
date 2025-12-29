@@ -3,7 +3,8 @@ static/molstar.js
 static/molstar.js.map
 static/team/
 index.html
+index.en.html
+index.ko.html
 
 # Mac
 .DS_Store
-

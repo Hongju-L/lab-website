@@ -1,10 +1,10 @@
 +++
 name = "Milot Mirdita"
-role = "Assistant Professor"
+role = "Assistant Professor at SKKU"
 alumni = false
-organizations = [ { name = "SKKU", url = "https://skku.edu" } ]
+organizations = [ { name = "SKKU School of Medicine", url = "https://www.skkumed.ac.kr" } ]
 bio = ""
-email = ""
+email = "milot@mirdita.org"
 
 [[education.courses]]
   course = "Ph.D. (Dr. rer. nat., summa cum laude)"
@@ -22,24 +22,14 @@ email = ""
   year = 2016
 
 [[social]]
-  icon = "globe"
-  icon_pack = "fas"
-  link = "https://mirdita.org"
-
-[[social]]
   icon = "envelope"
   icon_pack = "fas"
-  link = "mailto:milot@mirdita.de"
+  link = "mailto:milot@mirdita.org"
 
 [[social]]
-  icon = "github"
+  icon = "bluesky"
   icon_pack = "fab"
-  link = "https://github.com/milot-mirdita"
-
-[[social]]
-  icon = "mastodon"
-  icon_pack = "fab"
-  link = "https://mstdn.science/@milotmirdita"
+  link = "https://bsky.app/profile/milot.bsky.social"
 
 [[social]]
   icon = "graduation-cap"
@@ -48,7 +38,17 @@ email = ""
   alt = "Google Scholar"
 
 [[social]]
+  icon = "github"
+  icon_pack = "fab"
+  link = "https://github.com/milot-mirdita"
+
+[[social]]
+  icon = "orcid"
+  icon_pack = "ai"
+  link = "https://orcid.org/0000-0001-8637-6719"
+
+[[social]]
   icon = "cv"
   icon_pack = "ai"
-  link = "https://mirdita.org/static/cv.pdf"
+  link = "/static/CV.pdf"
 +++

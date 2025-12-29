@@ -1,23 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{lang}}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mirdita Lab - Laboratory of Bioinformatics &amp; Machine Learning</title>
-    <meta property="og:title" content="Mirdita Lab - Laboratory of Bioinformatics &amp; Machine Learning" />
+    <title>{{t:site.title}}</title>
+    <meta property="og:title" content="{{t:site.title}}" />
     <meta
       name="description"
-      content="Mirdita Lab builds scalable bioinformatics methods."
+      content="{{t:site.description}}"
     />
     <meta
       property="og:description"
-      content="Mirdita Lab builds scalable bioinformatics methods."
+      content="{{t:site.description}}"
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://mirdita.org" />
     <!-- <meta property="og:image" content="static/avatar_mm.jpg" /> -->
-    <meta property="og:image:alt" content="Mirdita Lab" />
+    <meta property="og:image:alt" content="{{t:site.name}}" />
     <link rel="canonical" href="https://mirdita.org" />
+    <link rel="alternate" hreflang="en" href="https://mirdita.org/index.en.html" />
+    <link rel="alternate" hreflang="ko" href="https://mirdita.org/index.ko.html" />
+    <link rel="alternate" hreflang="x-default" href="https://mirdita.org/index.en.html" />
     <link rel="stylesheet" href="static/all.min.css" />
     <link rel="stylesheet" href="static/academicons.min.css" />
     <link rel="stylesheet" href="static/fonts.css" />
@@ -28,14 +31,19 @@
     <header class="site-header">
       <div class="container">
         <div class="brand">
-          <span class="lab-name"><a href="https://mirdita.org">Mirdita Lab @ SKKU</a></span>
-          <span class="tagline">Laboratory of Bioinformatics <span class="fancy-amp">&amp;</span> Machine Learning</span>
+          <span class="lab-name"><a href="https://mirdita.org">{{t:brand.name}}</a></span>
+          <span class="tagline">{{t:brand.tagline}}</span>
         </div>
         <nav>
-          <a href="#team">Team</a>
-          <a href="#software">Software</a>
-          <a href="#publications">Publications</a>
-          <a href="#contact">Contact</a>
+          <a href="#team">{{t:nav.team}}</a>
+          <a href="#software">{{t:nav.software}}</a>
+          <a href="#publications">{{t:nav.publications}}</a>
+          <a href="#contact">{{t:nav.contact}}</a>
+          <span class="lang-switch" aria-label="{{t:nav.language}}">
+            <a href="/index.en.html" lang="en">EN</a>
+            <span class="lang-sep" aria-hidden="true">/</span>
+            <a href="/index.ko.html" lang="ko">KO</a>
+          </span>
         </nav>
       </div>
     </header>
@@ -44,15 +52,12 @@
       <section class="hero">
         <div class="container hero-layout">
           <div class="hero-content">
-            <h1>Laboratory of Bioinformatics&nbsp;<span class="fancy-amp">&amp;</span> Machine&nbsp;Learning</h1>
-            <p>
-              We bridge algorithms and usable software to map evolution, decode protein
-              function, and annotate the unknown at scale.
-            </p>
+            <h1>{{t:hero.title}}</h1>
+            <p>{{t:hero.subtitle}}</p>
             <div class="cta-group">
-              <a class="secondary" href="#software">Explore software</a>
-              <a class="secondary" href="#publications">Read papers</a>
-              <a class="cta" href="#team">Join the team</a>
+              <a class="secondary" href="#software">{{t:hero.cta.software}}</a>
+              <a class="secondary" href="#publications">{{t:hero.cta.publications}}</a>
+              <a class="cta" href="#team">{{t:hero.cta.team}}</a>
             </div>
           </div>
           <div class="hero-extra" aria-hidden="true">
@@ -68,7 +73,7 @@
                 href="https://alphafold.ebi.ac.uk/entry/Q8W3K0"
                 target="_blank"
                 rel="noopener"
-                aria-label="View AlphaFold entry Q8W3K0"
+                aria-label="{{t:structure.aria}}"
               >
                 Q8W3K0
               </a>
@@ -84,29 +89,20 @@
             <div class="pi-avatar">
               <img src="static/avatar_mm.jpg" alt="Milot Mirdita" />
             </div>
-            <p class="pi-name">Milot Mirdita</p>
-            <p class="pi-role">Assistant Professor at SKKU</p>
+            <p class="pi-name">{{t:pi.name}}</p>
+            <p class="pi-role">{{t:pi.role}}</p>
             <div class="pi-links">
-              <a href="mailto:milot@mirdita.org" aria-label="Email" target="_blank" rel="noopener"><i class="fas fa-envelope big-icon"></i></a>
-              <a href="https://bsky.app/profile/milot.bsky.social" aria-label="Follow on Bluesky" target="_blank" rel="noopener"><i class="fab fa-bluesky big-icon"></i></a>
-              <a href="https://scholar.google.com/citations?user=jaTEO_QAAAAJ" aria-label="Google Scholar profile" target="_blank" rel="noopener"><i class="fas fa-graduation-cap big-icon"></i></a>
-              <a href="https://github.com/milot-mirdita" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github big-icon"></i></a>
-              <a href="https://orcid.org/0000-0001-8637-6719" aria-label="ORCID" target="_blank" rel="noopener"><i class="ai ai-orcid big-icon"></i></a>
-              <a href="/static/CV.pdf" aria-label="Curriculum Vitae" target="_blank" rel="noopener"><i class="ai ai-cv big-icon"></i></a>
+              <a href="mailto:milot@mirdita.org" aria-label="{{t:pi.link.email}}" target="_blank" rel="noopener"><i class="fas fa-envelope big-icon"></i></a>
+              <a href="https://bsky.app/profile/milot.bsky.social" aria-label="{{t:pi.link.bluesky}}" target="_blank" rel="noopener"><i class="fab fa-bluesky big-icon"></i></a>
+              <a href="https://scholar.google.com/citations?user=jaTEO_QAAAAJ" aria-label="{{t:pi.link.scholar}}" target="_blank" rel="noopener"><i class="fas fa-graduation-cap big-icon"></i></a>
+              <a href="https://github.com/milot-mirdita" aria-label="{{t:pi.link.github}}" target="_blank" rel="noopener"><i class="fab fa-github big-icon"></i></a>
+              <a href="https://orcid.org/0000-0001-8637-6719" aria-label="{{t:pi.link.orcid}}" target="_blank" rel="noopener"><i class="ai ai-orcid big-icon"></i></a>
+              <a href="/static/CV.pdf" aria-label="{{t:pi.link.cv}}" target="_blank" rel="noopener"><i class="ai ai-cv big-icon"></i></a>
             </div>
           </div>
           <div class="pi-copy">
-            <p>
-              Milot Mirdita is an Assistant Professor at the Department of Precision Medicine <a href="https://www.skkumed.ac.kr">SKKU School of Medicine</a>. His research focuses on scalable,
-              open bioinformatics infrastructure for metagenomic analysis, high-throughput homology search,
-              clustering, taxonomy, and structure prediction.
-            </p>
-            <p>
-              He previously worked with <a href="https://steineggerlab.com">Prof. Dr. Martin Steinegger</a> and <a href="https://www.mpinat.mpg.de/soeding">Dr. Johannes Söding</a> to create widely
-              used methods for sequence alignment and annotation. Milot trained at the Max-Planck Institute
-              for Multidisciplinary Sciences (Dr. rer. nat.), LMU Munich (M.Sc. Computer Science), and LMU/TUM
-              (B.Sc. Bioinformatics).
-            </p>
+            <p>{{t:pi.bio1}}</p>
+            <p>{{t:pi.bio2}}</p>
             <div class="pi-video">
               <div class="video-frame">
                 <iframe
@@ -126,12 +122,8 @@
 
       <section id="team" class="section compact">
         <div class="container">
-          <h2>Team</h2>
-          <p>
-            We are hiring at all levels (lab manager, interns, graduate students, postdocs, and research software engineers) excited for
-            large-scale data processing, HPC/GPU programming, machine learning or open-source scientific software. Send a short
-            introduction and CV to <a href="mailto:milot@mirdita.org" target="_blank">milot@mirdita.org</a>.
-          </p>
+          <h2>{{t:team.heading}}</h2>
+          <p>{{t:team.copy}}</p>
           <div class="team-grid">
             <!-- team:grid:start -->
             <!-- team:grid:end -->
@@ -146,7 +138,7 @@
       <!-- alumni:section:start -->
       <section id="alumni" class="section compact">
         <div class="container">
-          <h2>Alumni</h2>
+          <h2>{{t:alumni.heading}}</h2>
           <div class="team-grid">
             <!-- alumni:grid:start -->
             <!-- alumni:grid:end -->
@@ -161,41 +153,34 @@
 
       <section id="software" class="section muted compact">
         <div class="container">
-          <h2>Software</h2>
+          <h2>{{t:software.heading}}</h2>
           <div class="software-grid">
             <article class="software-card">
-              <img src="static/ColabFold_Marv_Logo_Small.png" alt="ColabFold logo" />
+              <img src="static/ColabFold_Marv_Logo_Small.png" alt="{{t:software.colabfold.alt}}" />
               <div>
-                <h3>ColabFold</h3>
-                <p>
-                  Easy and accurate AlphaFold2 inference in the browser, maintained together with the <a href="https://steineggerlab.com">Steinegger Lab (SNU)</a>, <a href="https://solab.org">Solab (MIT)</a>
-                  and open-source contributors.
-                </p>
-                <a class="secondary" href="https://colabfold.com" target="_blank" rel="noopener">Open ColabFold &rarr;</a>
-                <a class="secondary" href="hhttps://www.nature.com/articles/s41596-024-01060-5" target="_blank" rel="noopener">Protocol &rarr;</a>
-                <a class="secondary" href="https://github.com/sokrypton/ColabFold" target="_blank" rel="noopener">GitHub &rarr;</a>
+                <h3>{{t:software.colabfold.title}}</h3>
+                <p>{{t:software.colabfold.description}}</p>
+                <a class="secondary" href="https://colabfold.com" target="_blank" rel="noopener">{{t:software.colabfold.link.main}}</a>
+                <a class="secondary" href="hhttps://www.nature.com/articles/s41596-024-01060-5" target="_blank" rel="noopener">{{t:software.colabfold.link.protocol}}</a>
+                <a class="secondary" href="https://github.com/sokrypton/ColabFold" target="_blank" rel="noopener">{{t:software.colabfold.link.github}}</a>
               </div>
             </article>
             <article class="software-card">
-              <img src="static/foldseek.png" alt="Foldseek logo" />
+              <img src="static/foldseek.png" alt="{{t:software.foldseek.alt}}" />
               <div>
-                <h3>Foldseek Server</h3>
-                <p>
-                  Structure search that lets researchers query massive protein databases for homologous folds in seconds.
-                </p>
-                <a class="secondary" href="https://search.foldseek.com" target="_blank" rel="noopener">Visit Foldseek Server &rarr;</a>
-                <a class="secondary" href="https://www.nature.com/articles/s41587-023-01773-0" target="_blank" rel="noopener">Paper &rarr;</a>
-                <a class="secondary" href="https://github.com/steineggerlab/foldseek" target="_blank" rel="noopener">GitHub &rarr;</a>
+                <h3>{{t:software.foldseek.title}}</h3>
+                <p>{{t:software.foldseek.description}}</p>
+                <a class="secondary" href="https://search.foldseek.com" target="_blank" rel="noopener">{{t:software.foldseek.link.main}}</a>
+                <a class="secondary" href="https://www.nature.com/articles/s41587-023-01773-0" target="_blank" rel="noopener">{{t:software.foldseek.link.paper}}</a>
+                <a class="secondary" href="https://github.com/steineggerlab/foldseek" target="_blank" rel="noopener">{{t:software.foldseek.link.github}}</a>
               </div>
             </article>
             <article class="software-card">
-              <img src="static/mmseqs.png" alt="MMseqs2-GPU logo" />
+              <img src="static/mmseqs.png" alt="{{t:software.mmseqs.alt}}" />
               <div>
-                <h3>MMseqs2-GPU</h3>
-                <p>
-                  GPU-accelerated sequence search for high throughput and low latency.
-                </p>
-                <a class="secondary" href="https://www.nature.com/articles/s41592-025-02819-8" target="_blank" rel="noopener">MMseqs2-GPU Paper &rarr;</a>
+                <h3>{{t:software.mmseqs.title}}</h3>
+                <p>{{t:software.mmseqs.description}}</p>
+                <a class="secondary" href="https://www.nature.com/articles/s41592-025-02819-8" target="_blank" rel="noopener">{{t:software.mmseqs.link.paper}}</a>
               </div>
             </article>
           </div>
@@ -204,38 +189,31 @@
 
       <section id="publications" class="section compact">
         <div class="container">
-          <h2>Publications</h2>
-          <p>
-            Full list available on <a href="https://orcid.org/0000-0001-8637-6719">ORCID</a> or <a href="https://scholar.google.com/citations?user=jaTEO_QAAAAJ">Google Scholar</a>.
-          </p>
+          <h2>{{t:publications.heading}}</h2>
+          <p>{{t:publications.copy}}</p>
           <ul id="publication-list" class="pub-list" aria-live="polite">
             <!-- pubs:list:start -->
             <!-- pubs:list:end -->
           </ul>
-          <!-- pubs:data:start -->
-          <script type="application/json" id="publication-data"></script>
-          <!-- pubs:data:end -->
-          <button type="button" id="show-more-pubs" class="show-more-pubs">Show more</button>
+          <button type="button" id="show-more-pubs" class="show-more-pubs">{{t:publications.show_more}}</button>
         </div>
       </section>
 
       <section id="contact" class="section muted compact">
         <div class="container">
-          <h2>Contact</h2>
-          <p>
-            Email: <a href="mailto:milot@mirdita.org">milot@mirdita.org</a><br>
-            SKKU, Suwon, Korea
-          </p>
+          <h2>{{t:contact.heading}}</h2>
+          <p>{{t:contact.copy}}</p>
           <div
             id="contact-map"
             class="contact-map"
             data-lat="37.2945"
             data-lng="126.9747"
             data-zoom="14"
-            data-label="Sungkyunkwan University, Suwon"
+            data-label="{{t:contact.map_label}}"
           ></div>
         </div>
       </section>
+      <div class="page-spacer" aria-hidden="true"></div>
     </main>
 
     <!-- Font switcher widget. Uncomment to enable. -->

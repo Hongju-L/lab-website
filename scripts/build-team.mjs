@@ -6,11 +6,16 @@ import { fileURLToPath } from "url";
 
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const TEAM_DIR = path.join(ROOT_DIR, "team");
+const I18N_DIR = path.join(ROOT_DIR, "i18n");
 const TEMPLATE_PATH = path.join(ROOT_DIR, "index.template.html");
-const OUTPUT_PATH = path.join(ROOT_DIR, "index.html");
+const OUTPUT_MAP = {
+  en: path.join(ROOT_DIR, "index.en.html"),
+  ko: path.join(ROOT_DIR, "index.ko.html"),
+};
 const BIB_PATH = path.join(ROOT_DIR, "static", "zotero.bib");
 const STATIC_TEAM_DIR = path.join(ROOT_DIR, "static", "team");
 const AVATAR_SIZE = 336;
+const LANGS = ["en", "ko"];
 const GRID_START = "<!-- team:grid:start -->";
 const GRID_END = "<!-- team:grid:end -->";
 const DETAILS_START = "<!-- team:details:start -->";
@@ -23,18 +28,13 @@ const ALUMNI_DETAILS_START = "<!-- alumni:details:start -->";
 const ALUMNI_DETAILS_END = "<!-- alumni:details:end -->";
 const PUBS_LIST_START = "<!-- pubs:list:start -->";
 const PUBS_LIST_END = "<!-- pubs:list:end -->";
-const PUBS_DATA_START = "<!-- pubs:data:start -->";
-const PUBS_DATA_END = "<!-- pubs:data:end -->";
 const GRID_INDENT = "            ";
 const DETAIL_INDENT = `${GRID_INDENT}      `;
 const DETAIL_INNER_INDENT = `${GRID_INDENT}        `;
 const PUB_LIST_INDENT = "            ";
 const PUB_INNER_INDENT = "              ";
 const PUB_DEEP_INDENT = "                ";
-const PUB_DATA_INDENT = "          ";
 const PLACEHOLDER_COUNT = 1;
-const PLACEHOLDER_LABEL = "You?";
-const PLACEHOLDER_ROLE = "Join us";
 const PLACEHOLDER_LINK = "mailto:milot@mirdita.org";
 const PUB_PAGE_SIZE = 5;
 const MONTH_MAP = {
@@ -341,6 +341,110 @@ function escapeHtml(value) {
     .replace(/'/g, "&#39;");
 }
 
+function escapeAttribute(value) {
+  return escapeHtml(value).replace(/\n/g, "&#10;");
+}
+
+function parseI18nYaml(text) {
+  const lines = text.split(/\r?\n/);
+  const result = {};
+  let index = 0;
+
+  while (index < lines.length) {
+    const line = lines[index];
+    if (!line.trim() || line.trim().startsWith("#")) {
+      index += 1;
+      continue;
+    }
+
+    const match = line.match(/^([A-Za-z0-9_.-]+):\s*(.*)$/);
+    if (!match) {
+      index += 1;
+      continue;
+    }
+
+    const key = match[1].trim();
+    let value = match[2] ?? "";
+    const trimmedValue = value.trim();
+
+    if (trimmedValue.startsWith("|")) {
+      const blockLines = [];
+      index += 1;
+      let blockIndent = null;
+
+      while (index < lines.length) {
+        const raw = lines[index];
+        if (!raw.trim() && blockIndent === null) {
+          blockLines.push("");
+          index += 1;
+          continue;
+        }
+
+        const indent = raw.match(/^\s*/)?.[0].length ?? 0;
+        if (blockIndent === null) {
+          if (!raw.trim()) {
+            blockLines.push("");
+            index += 1;
+            continue;
+          }
+          blockIndent = indent;
+        }
+
+        if (indent < blockIndent && raw.trim()) {
+          break;
+        }
+
+        blockLines.push(raw.slice(blockIndent));
+        index += 1;
+      }
+
+      result[key] = blockLines.join("\n");
+      continue;
+    }
+
+    if (
+      (trimmedValue.startsWith("\"") && trimmedValue.endsWith("\"")) ||
+      (trimmedValue.startsWith("'") && trimmedValue.endsWith("'"))
+    ) {
+      value = trimmedValue.slice(1, -1);
+    } else {
+      value = trimmedValue;
+    }
+
+    result[key] = value;
+    index += 1;
+  }
+
+  return result;
+}
+
+async function loadI18n(lang) {
+  const filePath = path.join(I18N_DIR, `${lang}.yaml`);
+  try {
+    const raw = await fs.readFile(filePath, "utf8");
+    return parseI18nYaml(raw);
+  } catch (error) {
+    console.warn(`Unable to read ${filePath}: ${error.message}`);
+    return {};
+  }
+}
+
+function applyI18n(template, dict, fallback, lang) {
+  const seenMissing = new Set();
+  const withLang = template.replace(/\{\{lang\}\}/g, lang);
+  return withLang.replace(/\{\{t:([^}]+)\}\}/g, (match, key) => {
+    const value = dict[key] ?? fallback[key];
+    if (value === undefined) {
+      if (!seenMissing.has(key)) {
+        console.warn(`Missing i18n key "${key}" for ${lang}.`);
+        seenMissing.add(key);
+      }
+      return "";
+    }
+    return value;
+  });
+}
+
 function getImageMagickCommand() {
   try {
     execFileSync("magick", ["-version"], { stdio: "ignore" });
@@ -565,13 +669,9 @@ function reorderAuthorName(name = "") {
   return reordered.replace(/\s+/g, " ").trim();
 }
 
-function serializeJsonForHtml(value) {
-  return JSON.stringify(value).replace(/</g, "\\u003c");
-}
-
-function renderPublicationMarkup(entry, index) {
+function renderPublicationMarkup(entry) {
   const copyButton =
-    `<button type="button" class="copy-bibtex" data-entry-index="${index}" aria-label="Copy BibTeX" title="Copy BibTeX">&#10697;</button>`;
+    `<button type="button" class="copy-bibtex" data-bibtex="${escapeAttribute(entry.bibtex)}" aria-label="Copy BibTeX" title="Copy BibTeX">&#10697;</button>`;
   const doiMarkup = entry.doi
     ? ` · <a href="https://doi.org/${escapeHtml(entry.doi)}" target="_blank" rel="noopener">DOI</a> ${copyButton}`
     : ` · ${copyButton}`;
@@ -598,9 +698,10 @@ function renderPublicationMarkup(entry, index) {
   );
 }
 
-function renderPublicationList(entries) {
+function renderPublicationList(entries, labels) {
   if (!entries.length) {
-    return `${PUB_LIST_INDENT}<li>No publications found.</li>`;
+    const emptyLabel = labels.publicationsEmpty || "No publications found.";
+    return `${PUB_LIST_INDENT}<li>${escapeHtml(emptyLabel)}</li>`;
   }
   return entries.map(renderPublicationMarkup).join("\n");
 }
@@ -743,8 +844,9 @@ function renderSocialLinks(social) {
   return `\n${DETAIL_INDENT}<div class="pi-links">\n${links}\n${DETAIL_INDENT}</div>`;
 }
 
-function renderEducation(courses) {
+function renderEducation(courses, labels) {
   if (!Array.isArray(courses) || !courses.length) return "";
+  const heading = labels.education || "Education";
   const items = courses
     .map((course) => {
       if (!course || !course.course) return "";
@@ -767,7 +869,7 @@ function renderEducation(courses) {
     .join("\n");
   if (!items) return "";
   return `\n${DETAIL_INDENT}<div class="team-education">` +
-    `\n${DETAIL_INNER_INDENT}<h3>Education</h3>` +
+    `\n${DETAIL_INNER_INDENT}<h3>${escapeHtml(heading)}</h3>` +
     `\n${DETAIL_INNER_INDENT}<ul class="team-education-list">` +
     `\n${items}` +
     `\n${DETAIL_INNER_INDENT}</ul>` +
@@ -787,10 +889,11 @@ function renderMemberCard(member) {
   );
 }
 
-function renderPlaceholderCard(index) {
-  const label = escapeHtml(PLACEHOLDER_LABEL);
-  const role = escapeHtml(PLACEHOLDER_ROLE);
-  const ariaLabel = `Join the team (${index + 1})`;
+function renderPlaceholderCard(index, labels) {
+  const label = escapeHtml(labels.placeholderName || "You?");
+  const role = escapeHtml(labels.placeholderRole || "Join us");
+  const ariaLabelPrefix = labels.placeholderAria || "Join the team";
+  const ariaLabel = `${ariaLabelPrefix} (${index + 1})`;
   return (
     `${GRID_INDENT}<a class="team-card placeholder" href="${escapeHtml(PLACEHOLDER_LINK)}" aria-label="${escapeHtml(ariaLabel)}">` +
     `\n${GRID_INDENT}  <span class="team-avatar placeholder" aria-hidden="true">+</span>` +
@@ -800,13 +903,13 @@ function renderPlaceholderCard(index) {
   );
 }
 
-function renderMemberDetail(member) {
+function renderMemberDetail(member, labels) {
   const avatar = member.avatarSrc
     ? `<img src="${escapeHtml(member.avatarSrc)}" alt="${escapeHtml(member.name)}" loading="lazy" />`
     : `<span class="team-avatar-initials">${escapeHtml(member.initials)}</span>`;
   const organizationsMarkup = renderOrganizations(member.organizations);
   const socialMarkup = renderSocialLinks(member.social);
-  const educationMarkup = renderEducation(member.educationCourses);
+  const educationMarkup = renderEducation(member.educationCourses, labels);
   const bodyMarkup = member.bioHtml || "";
   const detailNameId = `team-detail-name-${member.slug}`;
   return (
@@ -857,19 +960,19 @@ function removeBetweenMarkers(source, startMarker, endMarker) {
   return `${before}${after}`;
 }
 
-async function loadMembers() {
+async function loadMembers(teamDir, avatarFallbackDirs = []) {
   let entries = [];
   try {
-    entries = await fs.readdir(TEAM_DIR, { withFileTypes: true });
+    entries = await fs.readdir(teamDir, { withFileTypes: true });
   } catch (error) {
-    console.error(`Failed to read team directory: ${TEAM_DIR}`);
+    console.error(`Failed to read team directory: ${teamDir}`);
     throw error;
   }
 
   const members = [];
   for (const entry of entries) {
     if (!entry.isDirectory()) continue;
-    const memberDir = path.join(TEAM_DIR, entry.name);
+    const memberDir = path.join(teamDir, entry.name);
     const memberFile = await findMemberFile(memberDir);
     if (!memberFile) {
       console.warn(`No profile file found in ${memberDir}`);
@@ -885,7 +988,14 @@ async function loadMembers() {
       delimiter === "---" ? parseYamlFrontMatter(frontMatter) : parseTomlFrontMatter(frontMatter);
     const name = data.name || entry.name;
     const slug = slugify(entry.name);
-    const avatarInfo = await findAvatar(memberDir);
+    let avatarInfo = await findAvatar(memberDir);
+    if (!avatarInfo) {
+      for (const fallbackDir of avatarFallbackDirs) {
+        const fallbackMemberDir = path.join(fallbackDir, entry.name);
+        avatarInfo = await findAvatar(fallbackMemberDir);
+        if (avatarInfo) break;
+      }
+    }
     const avatarSrc = avatarInfo ? `static/team/${slug}${avatarInfo.ext}` : "";
     const bioHtml = body
       ? body
@@ -913,27 +1023,27 @@ async function loadMembers() {
 }
 
 async function main() {
-  const members = await loadMembers();
-  await buildTeamAvatars(members);
-  const activeMembers = members.filter((member) => !member.isAlumni);
-  const alumniMembers = members.filter((member) => member.isAlumni);
-  const placeholders = Array.from({ length: PLACEHOLDER_COUNT }, (_, index) =>
-    renderPlaceholderCard(index)
-  );
-  const gridMarkup = activeMembers.map(renderMemberCard).concat(placeholders).join("\n");
-  const detailsMarkup = activeMembers.map(renderMemberDetail).join("\n");
-
   const source = await fs.readFile(TEMPLATE_PATH, "utf8");
-  let updated = replaceBetweenMarkers(source, GRID_START, GRID_END, gridMarkup);
-  updated = replaceBetweenMarkers(updated, DETAILS_START, DETAILS_END, detailsMarkup);
-  if (alumniMembers.length) {
-    const alumniGridMarkup = alumniMembers.map(renderMemberCard).join("\n");
-    const alumniDetailsMarkup = alumniMembers.map(renderMemberDetail).join("\n");
-    updated = replaceBetweenMarkers(updated, ALUMNI_GRID_START, ALUMNI_GRID_END, alumniGridMarkup);
-    updated = replaceBetweenMarkers(updated, ALUMNI_DETAILS_START, ALUMNI_DETAILS_END, alumniDetailsMarkup);
-  } else {
-    updated = removeBetweenMarkers(updated, ALUMNI_SECTION_START, ALUMNI_SECTION_END);
+  const i18nEn = await loadI18n("en");
+  const i18nKo = await loadI18n("ko");
+  const i18nMap = { en: i18nEn, ko: i18nKo };
+
+  const membersByLang = {};
+  for (const lang of LANGS) {
+    const langDir = path.join(TEAM_DIR, lang);
+    const fallbackDirs = LANGS.filter((item) => item !== lang).map((item) => path.join(TEAM_DIR, item));
+    membersByLang[lang] = await loadMembers(langDir, fallbackDirs);
   }
+
+  const avatarMap = new Map();
+  Object.values(membersByLang)
+    .flat()
+    .forEach((member) => {
+      if (!avatarMap.has(member.slug)) {
+        avatarMap.set(member.slug, member);
+      }
+    });
+  await buildTeamAvatars(Array.from(avatarMap.values()));
 
   let bibText = "";
   try {
@@ -942,16 +1052,51 @@ async function main() {
     console.warn(`Unable to read ${BIB_PATH}: ${error.message}`);
   }
   const bibEntries = parseBibEntries(bibText);
-  const publicationListMarkup = renderPublicationList(bibEntries);
-  const publicationDataMarkup = `${PUB_DATA_INDENT}<script type="application/json" id="publication-data">${serializeJsonForHtml(bibEntries)}</script>`;
+  for (const lang of LANGS) {
+    const outputPath = OUTPUT_MAP[lang];
+    if (!outputPath) continue;
+    const dict = i18nMap[lang] || {};
+    const labels = {
+      placeholderName: dict["team.placeholder.name"] || i18nEn["team.placeholder.name"],
+      placeholderRole: dict["team.placeholder.role"] || i18nEn["team.placeholder.role"],
+      placeholderAria: dict["team.placeholder.aria"] || i18nEn["team.placeholder.aria"],
+      education: dict["education.heading"] || i18nEn["education.heading"],
+      publicationsEmpty: dict["publications.empty"] || i18nEn["publications.empty"],
+    };
 
-  updated = replaceBetweenMarkers(updated, PUBS_LIST_START, PUBS_LIST_END, publicationListMarkup);
-  updated = replaceBetweenMarkers(updated, PUBS_DATA_START, PUBS_DATA_END, publicationDataMarkup);
-  await fs.writeFile(OUTPUT_PATH, updated);
+    const members = membersByLang[lang] || [];
+    const activeMembers = members.filter((member) => !member.isAlumni);
+    const alumniMembers = members.filter((member) => member.isAlumni);
+    const placeholders = Array.from({ length: PLACEHOLDER_COUNT }, (_, index) =>
+      renderPlaceholderCard(index, labels)
+    );
+    const gridMarkup = activeMembers.map(renderMemberCard).concat(placeholders).join("\n");
+    const detailsMarkup = activeMembers
+      .map((member) => renderMemberDetail(member, labels))
+      .join("\n");
 
-  console.log(
-    `Updated team section with ${activeMembers.length} member(s) and ${alumniMembers.length} alumni.`
-  );
+    let updated = applyI18n(source, dict, i18nEn, lang);
+    updated = replaceBetweenMarkers(updated, GRID_START, GRID_END, gridMarkup);
+    updated = replaceBetweenMarkers(updated, DETAILS_START, DETAILS_END, detailsMarkup);
+    if (alumniMembers.length) {
+      const alumniGridMarkup = alumniMembers.map(renderMemberCard).join("\n");
+      const alumniDetailsMarkup = alumniMembers
+        .map((member) => renderMemberDetail(member, labels))
+        .join("\n");
+      updated = replaceBetweenMarkers(updated, ALUMNI_GRID_START, ALUMNI_GRID_END, alumniGridMarkup);
+      updated = replaceBetweenMarkers(updated, ALUMNI_DETAILS_START, ALUMNI_DETAILS_END, alumniDetailsMarkup);
+    } else {
+      updated = removeBetweenMarkers(updated, ALUMNI_SECTION_START, ALUMNI_SECTION_END);
+    }
+
+    const publicationListMarkup = renderPublicationList(bibEntries, labels);
+    updated = replaceBetweenMarkers(updated, PUBS_LIST_START, PUBS_LIST_END, publicationListMarkup);
+    await fs.writeFile(outputPath, updated);
+
+    console.log(
+      `Updated ${path.basename(outputPath)} with ${activeMembers.length} member(s) and ${alumniMembers.length} alumni.`
+    );
+  }
 }
 
 main().catch((error) => {

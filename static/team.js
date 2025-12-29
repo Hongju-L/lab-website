@@ -8,6 +8,7 @@ function onReady(callback) {
 
 function initTeamDetails() {
   const grids = Array.from(document.querySelectorAll(".team-grid"));
+  const pageSpacer = document.querySelector(".page-spacer");
   if (!grids.length) return;
 
   const sections = [];
@@ -31,6 +32,12 @@ function initTeamDetails() {
     } else {
       window.location.hash = "";
     }
+  }
+
+  function updatePageSpacer() {
+    if (!pageSpacer) return;
+    const hasOpen = Boolean(document.querySelector(".team-detail:not([hidden])"));
+    pageSpacer.hidden = hasOpen;
   }
 
   grids.forEach((grid) => {
@@ -66,6 +73,7 @@ function initTeamDetails() {
         panel.hidden = true;
         panel.setAttribute("aria-hidden", "true");
       });
+      updatePageSpacer();
     }
 
     function openDetail(card, targetId) {
@@ -76,6 +84,7 @@ function initTeamDetails() {
       panel.setAttribute("aria-hidden", "false");
       card.setAttribute("aria-expanded", "true");
       card.classList.add("is-active");
+      updatePageSpacer();
     }
 
     function openById(targetId) {
@@ -137,6 +146,7 @@ function initTeamDetails() {
 
   window.addEventListener("hashchange", openByHash);
   openByHash();
+  updatePageSpacer();
 }
 
 onReady(initTeamDetails);
