@@ -15,7 +15,7 @@
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://mirdita.org" />
-    <meta property="og:image" content="static/og.png" />
+    <meta property="og:image" content="https://mirdita.org/static/og.png" />
     <meta property="og:image:alt" content="{{t:site.name}}" />
     <link rel="canonical" href="https://mirdita.org" />
     <link rel="alternate" hreflang="en" href="https://mirdita.org/index.en.html" />
@@ -161,7 +161,7 @@
                 <h3>{{t:software.colabfold.title}}</h3>
                 <p>{{t:software.colabfold.description}}</p>
                 <a class="secondary" href="https://colabfold.com" target="_blank" rel="noopener">{{t:software.colabfold.link.main}}</a>
-                <a class="secondary" href="hhttps://www.nature.com/articles/s41596-024-01060-5" target="_blank" rel="noopener">{{t:software.colabfold.link.protocol}}</a>
+                <a class="secondary" href="https://www.nature.com/articles/s41596-024-01060-5" target="_blank" rel="noopener">{{t:software.colabfold.link.protocol}}</a>
                 <a class="secondary" href="https://github.com/sokrypton/ColabFold" target="_blank" rel="noopener">{{t:software.colabfold.link.github}}</a>
               </div>
             </article>
@@ -181,6 +181,7 @@
                 <h3>{{t:software.mmseqs.title}}</h3>
                 <p>{{t:software.mmseqs.description}}</p>
                 <a class="secondary" href="https://www.nature.com/articles/s41592-025-02819-8" target="_blank" rel="noopener">{{t:software.mmseqs.link.paper}}</a>
+                <a class="secondary" href="https://github.com/soedinglab/mmseqs2" target="_blank" rel="noopener">{{t:software.mmseqs.link.github}}</a>
               </div>
             </article>
           </div>
@@ -203,11 +204,30 @@
         <div class="container">
           <h2>{{t:contact.heading}}</h2>
           <p>{{t:contact.copy}}</p>
+          <ul class="contact-list">
+            <li>
+              <i class="fas fa-envelope" aria-hidden="true"></i>
+              <a href="mailto:milot@mirdita.org" target="_blank" rel="noopener">milot@mirdita.org</a>
+            </li>
+            <li>
+              <i class="fas fa-location-dot" aria-hidden="true"></i>
+              <a href="#contact-map" class="contact-address-trigger">{{t:contact.map_label}}</a>
+            </li>
+            <li>
+              <i class="fab fa-bluesky" aria-hidden="true"></i>
+              <a href="https://bsky.app/profile/milot.bsky.social" target="_blank" rel="noopener">milot.bsky.social</a>
+            </li>
+            <li>
+              <i class="fab fa-linkedin" aria-hidden="true"></i>
+              <a href="https://www.linkedin.com/in/milotmirdita/" target="_blank" rel="noopener">linkedin.com/in/milotmirdita</a>
+            </li>
+          </ul>
           <div
             id="contact-map"
             class="contact-map"
-            data-lat="37.2945"
-            data-lng="126.9747"
+            data-lat="37.29215672333126"
+            data-lng="126.97329323440455"
+            data-naver-place="19198690"
             data-zoom="14"
             data-label="{{t:contact.map_label}}"
           ></div>

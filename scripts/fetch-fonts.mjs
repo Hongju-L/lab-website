@@ -10,7 +10,7 @@ const WEBFONTS_DIR = path.join(ROOT_DIR, "webfonts");
 const STATIC_DIR = path.join(ROOT_DIR, "static");
 const OUTPUT_CSS = path.join(STATIC_DIR, "fonts.css");
 const FONT_CSS_URL =
-  "https://fonts.googleapis.com/css2?family=Diphylleia:wght@400&family=Gothic+A1:wght@300;400;500;600;700&display=swap";
+  "https://fonts.googleapis.com/css2?family=Gowun Batang:wght@400&family=Gothic+A1:wght@300;400;500;600;700&display=swap";
 const USER_AGENT =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
 

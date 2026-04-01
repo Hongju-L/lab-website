@@ -19,7 +19,7 @@ email = "milot@mirdita.org"
 [[education.courses]]
   course = "B.Sc. in Bioinformatics"
   institution = "Ludwig Maximilian University of Munich & Technical University of Munich"
-  year = 2016
+  year = 2014
 
 [[social]]
   icon = "envelope"

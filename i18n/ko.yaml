@@ -1,25 +1,22 @@
 lang: ko
 site.name: 미르디타 랩
-site.title: 미르디타 랩 - 계산생물학 &amp; 분자 머신러닝 연구실
-site.description: 미르디타 랩은 확장 가능한 생물정보학 방법을 개발합니다.
-brand.name: 미르디타 랩 @ 성균관대
-brand.tagline: |-
-  계산생물학 <span class="fancy-amp">&amp;</span> 분자 머신러닝 연구실
+site.title: 미르디타 랩 - 계산생물학 및 분자 머신 러닝 연구실
+site.description: 우리는 생물학적 분자들의 탐색 및 기능 분석을 위한 실용적인 생물정보학 방법을 개발합니다.
+brand.name: 미르디타 랩 @ 성균관대학교
+brand.tagline: 계산생물학 및 분자 머신 러닝 연구실
 nav.team: 구성원
 nav.software: 소프트웨어
 nav.publications: 논문
 nav.contact: 연락처
 nav.language: 언어
-hero.title: |-
-  계산생물학&nbsp;<span class="fancy-amp">&amp;</span> 분자&nbsp;머신&nbsp;러닝&nbsp;연구실
-hero.subtitle: |-
-  우리는 알고리즘과 사용 가능한 소프트웨어를 연결하여 진화 지도를 만들고, 단백질 기능을 해독하며, 대규모로 미지의 데이터를 주석화합니다.
+hero.title: 계산생물학 및<br>분자 머신 러닝 연구실
+hero.subtitle: 우리는 생물학적 분자들의 탐색 및 기능 분석을 위한 실용적인 생물정보학 방법을 개발합니다.
 hero.cta.software: 소프트웨어 보기
 hero.cta.publications: 논문 보기
 hero.cta.team: 구성원 합류
 structure.aria: AlphaFold Q8W3K0 항목 보기
 pi.name: Milot Mirdita
-pi.role: 성균관대 조교수
+pi.role: 성균관대학교 조교수
 pi.link.email: 이메일
 pi.link.bluesky: 블루스카이 팔로우
 pi.link.scholar: Google Scholar 프로필
@@ -27,17 +24,12 @@ pi.link.github: GitHub
 pi.link.orcid: ORCID
 pi.link.cv: 이력서
 pi.bio1: |-
-  Milot Mirdita는 <a href="https://www.skkumed.ac.kr">성균관대학교 의과대학</a> 정밀의학과 조교수입니다. 그의 연구는 메타게놈 분석, 고속 동질성 검색,
-  클러스터링, 분류, 구조 예측을 위한 확장 가능한 생물정보학 인프라에 집중합니다.
+  Milot Mirdita 교수는 <a href="https://www.skkumed.ac.kr">성균관대학교 의과대학</a> 정밀의학과 조교수입니다. 현재 그의 연구실에서는 Metagenome 분석, 상동 구조의 고속 탐색, 클러스터링, 계통분류, 분자 구조 예측을 위한 생물정보학 소프트웨어의 개발 및 확장을 목표로 하고 있습니다.
 pi.bio2: |-
-  그는 <a href="https://steineggerlab.com">Martin Steinegger 교수</a>와 <a href="https://www.mpinat.mpg.de/soeding">Johannes Söding 박사</a>와 함께
-  널리 사용되는 서열 정렬 및 주석화 방법을 개발했습니다. Milot은 막스플랑크 다학제과학연구소(Dr. rer. nat.),
-  뮌헨 LMU(M.Sc. 컴퓨터과학), LMU/TUM(B.Sc. 생물정보학)에서 교육을 받았습니다.
+  Milot은 뮌헨 LMU/TUM에서 생물정보학으로 학사 학위를, 뮌헨 LMU에서 석사 학위를 취득하였으며, 막스 플랑크 연구소에서 박사 학위를 취득하였습니다. 박사 학위 취득 후에는 <a href="https://steineggerlab.com">Martin Steinegger 교수</a>, <a href="https://www.mpinat.mpg.de/soeding">Johannes Söding 박사와</a> 함께 생물학적 서열 정렬 및 탐색, 기능 분석 소프트웨어를 개발하였습니다.
 team.heading: 구성원
 team.copy: |-
-  연구실 매니저, 인턴, 대학원생, 박사후연구원, 연구 소프트웨어 엔지니어 등 모든 레벨에서 인재를 모집합니다.
-  대규모 데이터 처리, HPC/GPU 프로그래밍, 머신러닝, 오픈소스 과학 소프트웨어에 관심 있는 분들의 지원을 기다립니다.
-  간단한 소개와 CV를 <a href="mailto:milot@mirdita.org" target="_blank">milot@mirdita.org</a>로 보내주세요.
+  연구 인턴, 대학원생, 박사후연구원, 소프트웨어 엔지니어 등 다양한 인재를 모집 중에 있습니다. 빅데이터 처리, HPC/GPU 프로그래밍, 머신러닝, open-source 과학 소프트웨어 등에 관심 있는 분들께 저희 연구실의 문은 항상 열려 있습니다. 간략한 자기소개 및 CV를 <a href="mailto:milot@mirdita.org" target="_blank">milot@mirdita.org로</a> 보내주세요.
 team.placeholder.name: 당신?
 team.placeholder.role: 합류하세요
 team.placeholder.aria: 연구실 합류하기
@@ -47,23 +39,23 @@ software.heading: 소프트웨어
 software.colabfold.alt: ColabFold 로고
 software.colabfold.title: ColabFold
 software.colabfold.description: |-
-  브라우저에서 AlphaFold2 추론을 쉽고 정확하게 수행하는 도구입니다. <a href="https://steineggerlab.com">Steinegger Lab (SNU)</a>과
-  <a href="https://solab.org">Solab (MIT)</a> 및 오픈소스 기여자들과 함께 유지·관리하고 있습니다.
+  Google Colab 수준에서 AlphaFold2 추론을 쉽고 정확하게 수행하는 소프트웨어입니다. <a href="https://steineggerlab.com">Steinegger Lab (SNU)</a>, <a href="https://solab.org">Solab(MIT)</a>, 기타 다른 open-source 기여자들과 함께 관리하고 있습니다.
 software.colabfold.link.main: ColabFold 열기
 software.colabfold.link.protocol: 프로토콜
 software.colabfold.link.github: GitHub
 software.foldseek.alt: Foldseek 로고
 software.foldseek.title: Foldseek Server
 software.foldseek.description: |-
-  방대한 단백질 데이터베이스에서 상동 구조를 초고속으로 검색할 수 있는 구조 검색 도구입니다.
+ 방대한 단백질 데이터베이스 내에서 특정 단백질과 상동 구조를 가지는 단백질을 초고속으로 검색할 수 있는 소프트웨어입니다.
 software.foldseek.link.main: Foldseek Server 방문
 software.foldseek.link.paper: 논문
 software.foldseek.link.github: GitHub
 software.mmseqs.alt: MMseqs2-GPU 로고
 software.mmseqs.title: MMseqs2-GPU
 software.mmseqs.description: |-
-  고처리량과 저지연을 위한 GPU 가속 서열 검색 도구입니다.
-software.mmseqs.link.paper: MMseqs2-GPU 논문 &rarr;
+  짧은 대기 시간만으로도 많은 작업량을 처리할 수 있도록 개량된, GPU 기반 생물학적 서열 검색 도구입니다.
+software.mmseqs.link.paper: MMseqs2-GPU 논문
+software.mmseqs.link.github: GitHub
 publications.heading: 논문
 publications.copy: |-
   전체 목록은 <a href="https://orcid.org/0000-0001-8637-6719">ORCID</a> 또는
@@ -72,6 +64,11 @@ publications.show_more: 더 보기
 publications.empty: 논문이 없습니다.
 contact.heading: 연락처
 contact.copy: |-
-  이메일: <a href="mailto:milot@mirdita.org">milot@mirdita.org</a><br>
-  성균관대, 수원, 대한민국
-contact.map_label: 성균관대학교, 수원
+  공동 연구 등 협업, 초청 강연, 연구실 지원 등에 대해 언제든지 연락해 주세요. 
+contact.map_label: 16419 경기도 수원시 장안구 서부로 2066 의과대학(성균관대학교 자연과학캠퍼스)
+contact.link.email: 이메일
+contact.link.bluesky: 블루스카이
+contact.link.scholar: 구글 스칼라
+contact.link.github: 깃허브
+contact.link.orcid: ORCID
+contact.link.cv: 이력서

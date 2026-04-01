@@ -13,11 +13,11 @@ nav.language: Language
 hero.title: |-
   Laboratory for Computational Biology&nbsp;<span class="fancy-amp">&amp;</span> Molecular Machine&nbsp;Learning
 hero.subtitle: |-
-  We bridge algorithms and usable software to map evolution, decode protein function, and annotate the unknown at scale.
+  We build usable bioinformatics methods to annotate life at scale.
 hero.cta.software: Explore software
 hero.cta.publications: Read papers
 hero.cta.team: Join the team
-structure.aria: View AlphaFold entry Q8W3K0
+structure.aria: View AlphaFoldDB entry Q8W3K0
 pi.name: Milot Mirdita
 pi.role: Assistant Professor at SKKU
 pi.link.email: Email
@@ -31,13 +31,13 @@ pi.bio1: |-
   open bioinformatics infrastructure for metagenomic analysis, high-throughput homology search,
   clustering, taxonomy, and structure prediction.
 pi.bio2: |-
-  He previously worked with <a href="https://steineggerlab.com">Prof. Dr. Martin Steinegger</a> and <a href="https://www.mpinat.mpg.de/soeding">Dr. Johannes Söding</a> to create widely
-  used methods for sequence alignment and annotation. Milot trained at the Max-Planck Institute
+  He previously worked with <a href="https://steineggerlab.com">Prof. Dr. Martin Steinegger</a> (SNU) and <a href="https://www.mpinat.mpg.de/soeding">Dr. Johannes Söding</a> (MPI-NAT) to create widely
+  used methods for sequence alignment and annotation. Milot trained at the University of Göttingen and Max-Planck Institute
   for Multidisciplinary Sciences (Dr. rer. nat.), LMU Munich (M.Sc. Computer Science), and LMU/TUM
   (B.Sc. Bioinformatics).
 team.heading: Team
 team.copy: |-
-  We are hiring at all levels (lab manager, interns, graduate students, postdocs, and research software engineers) excited for
+  We are hiring at all levels (interns, graduate students, postdocs, and research software engineers) excited for
   large-scale data processing, HPC/GPU programming, machine learning or open-source scientific software. Send a short
   introduction and CV to <a href="mailto:milot@mirdita.org" target="_blank">milot@mirdita.org</a>.
 team.placeholder.name: You?
@@ -66,6 +66,7 @@ software.mmseqs.title: MMseqs2-GPU
 software.mmseqs.description: |-
   GPU-accelerated sequence search for high throughput and low latency.
 software.mmseqs.link.paper: MMseqs2-GPU Paper
+software.mmseqs.link.github: GitHub
 publications.heading: Publications
 publications.copy: |-
   Full list available on <a href="https://orcid.org/0000-0001-8637-6719">ORCID</a> or <a href="https://scholar.google.com/citations?user=jaTEO_QAAAAJ">Google Scholar</a>.
@@ -73,6 +74,11 @@ publications.show_more: Show more
 publications.empty: No publications found.
 contact.heading: Contact
 contact.copy: |-
-  Email: <a href="mailto:milot@mirdita.org">milot@mirdita.org</a><br>
-  SKKU, Suwon, Korea
-contact.map_label: Sungkyunkwan University, Suwon
+  Feel free to reach out for collaborations, talks, or student opportunities.
+contact.map_label: Sungkyunkwan University School of Medicine, 2066 Seobu-ro, Suwon 16419, South Korea 
+contact.link.email: Email
+contact.link.bluesky: Bluesky
+contact.link.scholar: Google Scholar
+contact.link.github: GitHub
+contact.link.orcid: ORCID
+contact.link.cv: CV
