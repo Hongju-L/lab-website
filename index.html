@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mirdita Lab</title>
+    <meta http-equiv="refresh" content="0; url=/index.en.html" />
+    <link rel="alternate" hreflang="en" href="https://mirdita.org/index.en.html" />
+    <link rel="alternate" hreflang="ko" href="https://mirdita.org/index.ko.html" />
+    <link rel="alternate" hreflang="x-default" href="https://mirdita.org/index.en.html" />
+  </head>
+  <body>
+    <script>
+      (function () {
+        var languages = (navigator.languages && navigator.languages.length)
+          ? navigator.languages
+          : [navigator.language || navigator.userLanguage || ""];
+        var preferred = "en";
+        for (var i = 0; i < languages.length; i += 1) {
+          var lang = (languages[i] || "").toLowerCase();
+          if (lang.indexOf("ko") === 0) {
+            preferred = "ko";
+            break;
+          }
+        }
+        window.location.replace("/index." + preferred + ".html");
+      })();
+    </script>
+    <noscript>
+      <p>
+        <a href="/index.en.html">English</a>
+        |
+        <a href="/index.ko.html">한국어</a>
+      </p>
+    </noscript>
+  </body>
+</html>
