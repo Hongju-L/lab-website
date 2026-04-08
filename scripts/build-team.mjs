@@ -8,6 +8,8 @@ const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".."
 const TEAM_DIR = path.join(ROOT_DIR, "team");
 const I18N_DIR = path.join(ROOT_DIR, "i18n");
 const TEMPLATE_PATH = path.join(ROOT_DIR, "index.template.html");
+const REDIRECT_TEMPLATE_PATH = path.join(ROOT_DIR, "index.redirect.template.html");
+const REDIRECT_OUTPUT_PATH = path.join(ROOT_DIR, "index.html");
 const OG_TEMPLATE_PATH = path.join(ROOT_DIR, "og-image.template.html");
 const OUTPUT_MAP = {
   en: path.join(ROOT_DIR, "index.en.html"),
@@ -1110,6 +1112,18 @@ async function main() {
     const ogOutput = applyI18n(ogTemplate, i18nEn, i18nEn, "en");
     await fs.writeFile(OG_OUTPUT_PATH, ogOutput);
     console.log(`Updated ${path.basename(OG_OUTPUT_PATH)} for OG screenshots.`);
+  }
+
+  let redirectTemplate = "";
+  try {
+    redirectTemplate = await fs.readFile(REDIRECT_TEMPLATE_PATH, "utf8");
+  } catch (error) {
+    console.warn(`Unable to read ${REDIRECT_TEMPLATE_PATH}: ${error.message}`);
+  }
+  if (redirectTemplate) {
+    const redirectOutput = applyI18n(redirectTemplate, i18nEn, i18nEn, "en");
+    await fs.writeFile(REDIRECT_OUTPUT_PATH, redirectOutput);
+    console.log(`Updated ${path.basename(REDIRECT_OUTPUT_PATH)}.`);
   }
 }
 

@@ -88,6 +88,7 @@ async function main() {
   try {
     browser = await puppeteer.launch({
       headless: true,
+      args: process.env.CI ? ["--no-sandbox", "--disable-setuid-sandbox"] : [],
     });
     const page = await browser.newPage();
     await page.setViewport({ width: 1200, height: 630, deviceScaleFactor: 1 });
