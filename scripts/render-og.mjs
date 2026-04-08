@@ -100,6 +100,10 @@ async function main() {
     browser = await puppeteer.launch({ headless: true, args });
     const page = await browser.newPage();
     await page.setViewport({ width: 1200, height: 630, deviceScaleFactor: 1 });
+    page.on("console", (msg) => console.log("PAGE:", msg.type(), msg.text()));
+    page.on("pageerror", (err) => console.error("PAGE ERROR:", err.message));
+    page.on("response", (res) => { if (res.status() >= 400) console.error(`HTTP ${res.status()}:`, res.url()); });
+
     await page.goto(OG_URL, { waitUntil: "domcontentloaded" });
 
     try {
