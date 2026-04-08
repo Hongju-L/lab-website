@@ -88,8 +88,11 @@ async function main() {
   try {
     const args = [
       "--use-gl=swiftshader",
+      "--use-angle=swiftshader",
+      "--enable-unsafe-swiftshader",
       "--enable-webgl",
       "--ignore-gpu-blocklist",
+      "--disable-gpu-sandbox",
     ];
     if (process.env.CI) {
       args.push("--no-sandbox", "--disable-setuid-sandbox");
@@ -97,7 +100,7 @@ async function main() {
     browser = await puppeteer.launch({ headless: true, args });
     const page = await browser.newPage();
     await page.setViewport({ width: 1200, height: 630, deviceScaleFactor: 1 });
-    await page.goto(OG_URL, { waitUntil: "networkidle2" });
+    await page.goto(OG_URL, { waitUntil: "domcontentloaded" });
 
     try {
       await page.evaluateHandle("document.fonts.ready");
